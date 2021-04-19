@@ -8,14 +8,14 @@ import com.brooks.poker.player.Player;
 
 /**
  * @author Trevor
- * 
+ *
  */
 public class AlwaysRaisePlayerAction implements PlayerAction{
 
     public static final int RAISE_AMOUNT = 50;
 
     @Override
-    public BettingOutcome getBettingOutcome(GameState gameState, Player player){
+    public BettingOutcome getBettingOutcome(Player player){
         return BettingOutcomeFactory.createRaiseOutcome(getBetAmount());
     }
 

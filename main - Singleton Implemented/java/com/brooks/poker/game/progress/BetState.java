@@ -40,7 +40,7 @@ public abstract class BetState extends GameProgressHandler {
 
     private void modifyGameState(Player player) {
         PlayerAction playerAction = player.getAction();
-        BettingOutcome outcome = playerAction.getBettingOutcome(gameState, player);
+        BettingOutcome outcome = playerAction.getBettingOutcome(player);
         outcome.modifyGameState(player);
     }
 

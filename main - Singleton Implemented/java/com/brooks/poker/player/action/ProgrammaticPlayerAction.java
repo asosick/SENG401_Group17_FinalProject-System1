@@ -11,14 +11,14 @@ import com.brooks.poker.player.Player;
 public class ProgrammaticPlayerAction implements PlayerAction{
 
     public PlayerAction delegate = NullPlayerAction.INSTANCE;
-    
+
     @Override
-    public BettingOutcome getBettingOutcome(GameState gameState, Player player){        
-        return delegate.getBettingOutcome(gameState, player);
+    public BettingOutcome getBettingOutcome(Player player){
+        return delegate.getBettingOutcome(player);
     }
 
     public void setPlayerAction(PlayerAction action){
         delegate = action;
     }
-    
+
 }

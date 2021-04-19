@@ -7,12 +7,12 @@ import com.brooks.poker.player.Player;
 
 /**
  * @author Trevor
- * 
+ *
  */
 public class AlwaysFoldPlayerAction implements PlayerAction{
 
     @Override
-    public BettingOutcome getBettingOutcome(GameState gameState, Player player){
+    public BettingOutcome getBettingOutcome(Player player){
         return BettingOutcomeFactory.createFoldOutcome();
     }
 

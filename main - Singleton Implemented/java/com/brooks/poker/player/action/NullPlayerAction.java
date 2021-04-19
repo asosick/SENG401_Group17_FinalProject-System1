@@ -7,7 +7,7 @@ import com.brooks.poker.player.Player;
 
 /**
  * @author Trevor
- * 
+ *
  */
 public final class NullPlayerAction implements PlayerAction{
 
@@ -17,7 +17,7 @@ public final class NullPlayerAction implements PlayerAction{
     }
 
     @Override
-    public BettingOutcome getBettingOutcome(GameState gameState, Player player){
+    public BettingOutcome getBettingOutcome(Player player){
         return BettingOutcomeFactory.createFoldOutcome();
     }
 

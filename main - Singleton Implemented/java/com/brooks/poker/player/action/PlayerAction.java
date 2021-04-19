@@ -9,6 +9,6 @@ import com.brooks.poker.player.Player;
  */
 public interface PlayerAction{
 
-    public BettingOutcome getBettingOutcome(GameState gameState, Player player);
+    public BettingOutcome getBettingOutcome(Player player);
 
 }
