@@ -12,8 +12,8 @@ public class BlindsOutcome extends RaiseOutcome{
     public BlindsOutcome(int blind){
         super(blind);
     }
-    
-    public int getBetAmount(GameState gameState, Player player){
+
+    public int getBetAmount(Player player){
         return fixedBet;
     }
 }

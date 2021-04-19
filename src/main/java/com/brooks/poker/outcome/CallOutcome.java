@@ -14,20 +14,20 @@ public class CallOutcome implements BettingOutcome{
     }
 
     @Override
-    public void modifyGameState(GameState gameState, Player player){
-        int betAmount = getBetAmount(gameState, player);        
+    public void modifyGameState(Player player){
+        int betAmount = getBetAmount(player);        
         player.requestBet(betAmount);
-        GameActions.updateCurrentBet(gameState.getPots(), player.getPendingBet());
+        GameActions.updateCurrentBet(GameState.getGameStateInstance().getPots(), player.getPendingBet());
 
         if (player.isAllIn()){
-            gameState.getPots().insertSubpot(player);
+        	GameState.getGameStateInstance().getPots().insertSubpot(player);
         }
 
     }
 
     @Override
-    public int getBetAmount(GameState gameState, Player player){
-        return gameState.getPots().getCurrentBet() - player.getPendingBet();
+    public int getBetAmount(Player player){
+        return GameState.getGameStateInstance().getPots().getCurrentBet() - player.getPendingBet();
     }
 
 }

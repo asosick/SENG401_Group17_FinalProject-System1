@@ -13,8 +13,8 @@ import com.brooks.poker.game.data.GameState;
  */
 public class TurnBetState extends FlopBetState {
 
-    public TurnBetState(GameState gameState){
-        super(gameState);
+    public TurnBetState(){
+        super();
        
     }
 

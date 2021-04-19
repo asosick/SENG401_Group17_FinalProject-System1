@@ -18,16 +18,16 @@ public class GameActions {
     private GameActions() {
     }
 
-    public static void beginHand(GameState gameState) {
-        gameState.getTable().reset();
-        gameState.getDeck().reset();
-        gameState.getCommunityCards().reset();
-        gameState.getTable().makeNextPlayerDealer();
-        gameState.getPots().reset(gameState.getTable().getAllPlayers());
+    public static void beginHand() {
+    	GameState.getGameStateInstance().getTable().reset();
+    	GameState.getGameStateInstance().getDeck().reset();
+    	GameState.getGameStateInstance().getCommunityCards().reset();
+    	GameState.getGameStateInstance().getTable().makeNextPlayerDealer();
+    	GameState.getGameStateInstance().getPots().reset(GameState.getGameStateInstance().getTable().getAllPlayers());
     }
 
-    public static Player getPlayerAfterDealer(GameState gameState) {
-        Table table = gameState.getTable();
+    public static Player getPlayerAfterDealer() {
+        Table table = GameState.getGameStateInstance().getTable();
 
         Player dealer = table.getDealer();
         return table.getNextActivePlayer(dealer);
@@ -42,10 +42,10 @@ public class GameActions {
         deck.dealCard();
     }
 
-    public static void dealCommunityCard(GameState gameState) {
-        Card dealtCard = gameState.getDeck().dealCard();
-        gameState.getCommunityCards().add(dealtCard);
-        for (Player p : gameState.getTable().getSortedActivePlayers()) {
+    public static void dealCommunityCard() {
+        Card dealtCard = GameState.getGameStateInstance().getDeck().dealCard();
+        GameState.getGameStateInstance().getCommunityCards().add(dealtCard);
+        for (Player p : GameState.getGameStateInstance().getTable().getSortedActivePlayers()) {
             p.addCard(dealtCard);
         }
     }
@@ -54,20 +54,20 @@ public class GameActions {
         pots.updateAmountOwed(pendingBet);
     }
 
-    public static void endBettingRound(GameState gameState) {
-        gameState.getPots().putPendingBetsIntoPots(gameState.getTable().getAllPlayers());
+    public static void endBettingRound() {
+    	GameState.getGameStateInstance().getPots().putPendingBetsIntoPots(GameState.getGameStateInstance().getTable().getAllPlayers());
     }
 
-    public static int getMinBet(GameState gameState) {
-        int minBet = gameState.getPots().getCurrentBet() + gameState.getBlindsAnte().bigBlind;
-        if (minBet < gameState.getBlindsAnte().bigBlind) {
-            minBet = gameState.getBlindsAnte().bigBlind;
+    public static int getMinBet() {
+        int minBet = GameState.getGameStateInstance().getPots().getCurrentBet() + GameState.getGameStateInstance().getBlindsAnte().bigBlind;
+        if (minBet < GameState.getGameStateInstance().getBlindsAnte().bigBlind) {
+            minBet = GameState.getGameStateInstance().getBlindsAnte().bigBlind;
         }
         return minBet;
     }
 
-    public static boolean invalid(GameState gameState) {
-        Set<Player> players = gameState.getTable().getAllPlayers();
+    public static boolean invalid() {
+        Set<Player> players = GameState.getGameStateInstance().getTable().getAllPlayers();
         if (players == null)
             return true;
         if (players.size() < MINIMUM_NUMBER_OF_PLAYERS)

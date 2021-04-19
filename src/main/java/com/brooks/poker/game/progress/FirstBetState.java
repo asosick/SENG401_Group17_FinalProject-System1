@@ -16,8 +16,8 @@ import com.brooks.poker.player.Player;
  */
 public class FirstBetState extends BetState {
 
-    public FirstBetState(GameState gameState) {
-        super(gameState);
+    public FirstBetState() {
+        super();
     }
 
     @Override
@@ -36,18 +36,18 @@ public class FirstBetState extends BetState {
     }
 
     private void ante() {
-        Table table = gameState.getTable();
-        table.executeOnEachActivePlayer(GameActions.getPlayerAfterDealer(gameState), new AnteCommand());
-        GameActions.endBettingRound(gameState);
+        Table table = GameState.getGameStateInstance().getTable();
+        table.executeOnEachActivePlayer(GameActions.getPlayerAfterDealer(), new AnteCommand());
+        GameActions.endBettingRound();
     }
 
     private Player blinds() {
-        BlindsAnte blinds = gameState.getBlindsAnte();
-        Player player = GameActions.getPlayerAfterDealer(gameState);
+        BlindsAnte blinds = GameState.getGameStateInstance().getBlindsAnte();
+        Player player = GameActions.getPlayerAfterDealer();
 
         betBlindAnte(player, blinds.smallBlind);
 
-        Table table = gameState.getTable();
+        Table table = GameState.getGameStateInstance().getTable();
         player = table.getNextActivePlayer(player);
 
         betBlindAnte(player, blinds.bigBlind);
@@ -58,7 +58,7 @@ public class FirstBetState extends BetState {
     private class AnteCommand implements PlayerCommand {
         @Override
         public void execute(Player player) {
-            int ante = gameState.getBlindsAnte().ante;
+            int ante = GameState.getGameStateInstance().getBlindsAnte().ante;
             betBlindAnte(player, ante);
         }
     }

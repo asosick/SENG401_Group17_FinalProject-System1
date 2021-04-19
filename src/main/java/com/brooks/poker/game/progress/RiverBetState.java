@@ -12,8 +12,8 @@ import com.brooks.poker.game.data.GameState;
  *
  */
 public class RiverBetState extends TurnBetState {
-    public RiverBetState(GameState gameState){
-        super(gameState);        
+    public RiverBetState(){
+        super();        
     }
 
     @Override

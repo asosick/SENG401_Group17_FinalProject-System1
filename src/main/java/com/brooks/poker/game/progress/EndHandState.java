@@ -15,20 +15,20 @@ import com.brooks.poker.player.Player;
  */
 public class EndHandState extends GameProgressHandler{
 
-    public EndHandState(GameState gameState){
-        super(gameState);
+    public EndHandState(){
+        super();
     }
 
     @Override
     public void handleState(){
-        Pots pots = gameState.getPots();
+        Pots pots = GameState.getGameStateInstance().getPots();
         pots.awardWinners();
         removePlayersWithNoChips();
     }
 
     @Override
     public GamePhase getNextPhase(){
-        Table table = gameState.getTable();
+        Table table = GameState.getGameStateInstance().getTable();
         if (table.getAllPlayers().size() <= 1){
             return GamePhase.END_GAME;
         }
@@ -37,7 +37,7 @@ public class EndHandState extends GameProgressHandler{
     }
 
     private void removePlayersWithNoChips(){
-        Table table = gameState.getTable();
+        Table table = GameState.getGameStateInstance().getTable();
         for (Player player : table.getAllPlayers()){
             if (player.getChipCount() <= 0){
                 table.removePlayer(player);

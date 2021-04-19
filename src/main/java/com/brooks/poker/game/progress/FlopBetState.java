@@ -14,13 +14,13 @@ import com.brooks.poker.player.Player;
  */
 public class FlopBetState extends BetState {
    
-	public FlopBetState(GameState gameState){
-        super(gameState);        
+	public FlopBetState(){
+        super();        
     }
 
     @Override
 	public void handleState() {
-        Player firstToAct = GameActions.getPlayerAfterDealer(gameState);    
+        Player firstToAct = GameActions.getPlayerAfterDealer();    
         bettingRound(firstToAct);
     }
     

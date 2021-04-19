@@ -20,13 +20,13 @@ import com.brooks.poker.player.Player;
  */
 public class BeginHandState extends GameProgressHandler{
 
-    public BeginHandState(GameState gameState){
-        super(gameState);
+    public BeginHandState(){
+        super();
     }
 
     @Override
     public void handleState(){
-    	GameActions.beginHand(gameState);
+    	GameActions.beginHand();
         dealCards();
     }
 
@@ -36,8 +36,8 @@ public class BeginHandState extends GameProgressHandler{
     }
 
     private void dealCards(){
-        Table table = gameState.getTable();
-        Player player = GameActions.getPlayerAfterDealer(gameState);
+        Table table = GameState.getGameStateInstance().getTable();
+        Player player = GameActions.getPlayerAfterDealer();
         table.executeOnEachActivePlayer(player, new DealHoleCardCommand());
         table.executeOnEachActivePlayer(player, new DealHoleCardCommand());
 
@@ -46,7 +46,7 @@ public class BeginHandState extends GameProgressHandler{
     private class DealHoleCardCommand implements PlayerCommand{
         @Override
         public void execute(Player player){
-        	GameActions.dealCardToPlayer(gameState.getDeck(), player);
+        	GameActions.dealCardToPlayer(GameState.getGameStateInstance().getDeck(), player);
         }
     }
 

@@ -22,16 +22,16 @@ public class GameStateFactory{
     private RiverBetState riverBetState;
     private EndHandState endHandState;
 
-    public GameStateFactory(GameState gameState){
-        beginHandState = new BeginHandState(gameState);
-        firstBetState = new FirstBetState(gameState);
-        flopState = new FlopState(gameState);
-        flopBetState = new FlopBetState(gameState);
-        turnState = new TurnState(gameState);
-        turnBetState = new TurnBetState(gameState);
-        riverState = new RiverState(gameState);
-        riverBetState = new RiverBetState(gameState);
-        endHandState = new EndHandState(gameState);
+    public GameStateFactory(){
+        beginHandState = new BeginHandState();
+        firstBetState = new FirstBetState();
+        flopState = new FlopState();
+        flopBetState = new FlopBetState();
+        turnState = new TurnState();
+        turnBetState = new TurnBetState();
+        riverState = new RiverState();
+        riverBetState = new RiverBetState();
+        endHandState = new EndHandState();
     }
 
     public GameProgressHandler getStateHandler(GamePhase cs){

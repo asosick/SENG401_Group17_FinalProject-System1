@@ -9,10 +9,10 @@ import com.brooks.poker.game.data.GameState;
  */
 public class NullHandState extends GameProgressHandler{
 
-    public static final NullHandState NULL_HAND_STATE = new NullHandState(null);
+    public static final NullHandState NULL_HAND_STATE = new NullHandState();
 
-    protected NullHandState(GameState gameState){
-        super(gameState);
+    protected NullHandState(){
+        super();
     }
 
     @Override

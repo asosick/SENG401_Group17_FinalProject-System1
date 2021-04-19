@@ -18,35 +18,35 @@ public abstract class BetState extends GameProgressHandler {
 
     private Player actionOnPlayer;
 
-    public BetState(GameState gameState) {
-        super(gameState);
+    public BetState() {
+        super();
     }
 
     public void bettingRound(Player startPlayer) {
-        Table table = gameState.getTable();
+        Table table = GameState.getGameStateInstance().getTable();
         actionOnPlayer = ensurePlayerIsActive(startPlayer);
-        BettingRound bettingRound = new BettingRound(gameState, actionOnPlayer, false);
+        BettingRound bettingRound = new BettingRound(actionOnPlayer, false);
         while (!bettingRound.isComplete()){
-            int currentBet = gameState.getPots().getCurrentBet();
+            int currentBet = GameState.getGameStateInstance().getPots().getCurrentBet();
             modifyGameState(actionOnPlayer);
             bettingRound.actionComplete(actionOnPlayer);
-            if(gameState.getPots().getCurrentBet() != currentBet){
-                bettingRound = new BettingRound(gameState, actionOnPlayer, true);
+            if(GameState.getGameStateInstance().getPots().getCurrentBet() != currentBet){
+                bettingRound = new BettingRound(actionOnPlayer, true);
             }
             actionOnPlayer = table.getNextActivePlayer(actionOnPlayer);
         }
-        GameActions.endBettingRound(gameState);
+        GameActions.endBettingRound();
     }
 
     private void modifyGameState(Player player) {
         PlayerAction playerAction = player.getAction();
-        BettingOutcome outcome = playerAction.getBettingOutcome(gameState, player);
-        outcome.modifyGameState(gameState, player);
+        BettingOutcome outcome = playerAction.getBettingOutcome(player);
+        outcome.modifyGameState(player);
     }
 
     protected void betBlindAnte(Player player, int amount) {
         BettingOutcome outcome = BettingOutcomeFactory.createBlindsOutcome(amount);
-        outcome.modifyGameState(gameState, player);
+        outcome.modifyGameState(player);
     }
 
     public boolean onePlayerInThePot() {

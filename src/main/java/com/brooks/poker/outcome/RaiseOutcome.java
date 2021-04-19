@@ -16,11 +16,11 @@ public class RaiseOutcome extends CallOutcome {
     }
 
     @Override
-    public int getBetAmount(GameState gameState, Player player) {
-        RaiseValidator raiseValidator = new RaiseValidator(gameState, player);
+    public int getBetAmount(Player player) {
+        RaiseValidator raiseValidator = new RaiseValidator(GameState.getGameStateInstance(), player);
 
         if (!raiseValidator.canRaise()) {
-            return gameState.getPots().getCurrentBet() - player.getPendingBet();
+            return GameState.getGameStateInstance().getPots().getCurrentBet() - player.getPendingBet();
         }
 
         if (!raiseValidator.validateBet(fixedBet)) {

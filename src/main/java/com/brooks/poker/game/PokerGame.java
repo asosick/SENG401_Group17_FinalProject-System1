@@ -11,26 +11,26 @@ import com.brooks.poker.game.progress.GameStateFactory;
  */
 public class PokerGame {
 
-    public static void playGame(GameState gameState) {
+    public static void playGame() {
 
-        GameStateFactory factory = new GameStateFactory(gameState);
+        GameStateFactory factory = new GameStateFactory();
         GamePhase currentPhase = GamePhase.BEGIN_HAND;
 
         while (!currentPhase.equals(GamePhase.END_GAME)) {
-            gameState.setGamePhase(currentPhase);
+        	GameState.getGameStateInstance().setGamePhase(currentPhase);
             GameProgressHandler handler = factory.getStateHandler(currentPhase);
 
             handler.handleState();
-            gameState.invokeGameStateHandlerFor(currentPhase);
+            GameState.getGameStateInstance().invokeGameStateHandlerFor(currentPhase);
 
-            if (GameActions.invalid(gameState)) {
+            if (GameActions.invalid()) {
                 currentPhase = GamePhase.END_GAME;
             } else {
                 currentPhase = handler.getNextPhase();
             }
 
         }
-        gameState.invokeGameStateHandlerFor(currentPhase);
+        GameState.getGameStateInstance().invokeGameStateHandlerFor(currentPhase);
     }
 
 }

@@ -15,16 +15,16 @@ public class FoldOutcome implements BettingOutcome{
     }
 
     @Override
-    public void modifyGameState(GameState gameState, Player player){
-        Table table = gameState.getTable();
+    public void modifyGameState(Player player){
+        Table table = GameState.getGameStateInstance().getTable();
         table.makeInactive(player);
 
-        Pots pots = gameState.getPots();
+        Pots pots = GameState.getGameStateInstance().getPots();
         pots.fold(player);
     }
 
     @Override
-    public int getBetAmount(GameState gameState, Player player){
+    public int getBetAmount(Player player){
         return 0;
     }
 

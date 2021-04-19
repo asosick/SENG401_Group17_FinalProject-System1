@@ -12,8 +12,8 @@ public abstract class GameProgressHandler {
 
     protected GameState gameState;
     
-    public GameProgressHandler(GameState gameState){
-        this.gameState = gameState;
+    public GameProgressHandler(){
+        this.gameState = GameState.getGameStateInstance();
     }
     
 	public abstract void handleState();

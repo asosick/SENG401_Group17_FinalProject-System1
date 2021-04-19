@@ -13,17 +13,17 @@ import com.brooks.poker.game.data.GameState;
  */
 public class FlopState extends GameProgressHandler {
 
-    public FlopState(GameState gameState){
-        super(gameState);        
+    public FlopState(){
+        super();        
     }
 
     @Override
     public void handleState(){
-    	GameActions.burnCard(gameState.getDeck());
+    	GameActions.burnCard(GameState.getGameStateInstance().getDeck());
 
-    	GameActions.dealCommunityCard(gameState);
-    	GameActions.dealCommunityCard(gameState);
-    	GameActions.dealCommunityCard(gameState);       
+    	GameActions.dealCommunityCard();
+    	GameActions.dealCommunityCard();
+    	GameActions.dealCommunityCard();       
     }
 
     @Override
